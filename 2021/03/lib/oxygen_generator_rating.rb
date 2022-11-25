@@ -3,6 +3,7 @@
 # Advent of Code puzzle
 class OxygenGeneratorRating
   class << self
+    # rubocop:disable Metrics/AbcSize
     def call(input)
       pattern = ''
 
@@ -13,5 +14,6 @@ class OxygenGeneratorRating
         return matched[0].to_i(2) if matched.size == 1
       end
     end
+    # rubocop:enable Metrics/AbcSize
   end
 end
