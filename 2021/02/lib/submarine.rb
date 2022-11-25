@@ -2,21 +2,22 @@
 
 # It's a submarine, not built by ScoMo
 class Submarine
-  attr_reader :depth, :horizontal
+  attr_reader :aim, :depth, :horizontal
 
   def initialize
-    @depth = @horizontal = 0
+    @aim = @depth = @horizontal = 0
   end
 
   def forward(amount)
     @horizontal += amount
+    @depth += (aim * amount)
   end
 
   def up(amount)
-    @depth -= amount
+    @aim -= amount
   end
 
   def down(amount)
-    @depth += amount
+    @aim += amount
   end
 end

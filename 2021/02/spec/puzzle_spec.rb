@@ -14,7 +14,7 @@ RSpec.describe Puzzle do
         ['forward', 2]
       ]
     end
-    let(:expected_answer) { 150 }
+    let(:expected_answer) { 900 }
 
     describe '.call' do
       it 'returns the correct result' do
