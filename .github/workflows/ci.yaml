@@ -17,7 +17,7 @@ jobs:
         with:
           ruby-version: 3.1.2
           bundler-cache: true
-        working-directory: "${{ matrix.year }}/${{ matrix.day }}"
+          working-directory: "${{ matrix.year }}/${{ matrix.day }}"
         if: steps.check_exists.outputs.files_exists == 'true'
       - name: RSpec
         run: "bundle exec rspec"
@@ -39,7 +39,7 @@ jobs:
         with:
           ruby-version: 3.1.2
           bundler-cache: true
-        working-directory: "${{ matrix.year }}/${{ matrix.day }}"
+          working-directory: "${{ matrix.year }}/${{ matrix.day }}"
         if: steps.check_exists.outputs.files_exists == 'true'
       - name: RuboCop
         run: "bundle exec rubocop"
