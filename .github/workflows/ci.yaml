@@ -1,7 +1,6 @@
-name: CI
 on: [push]
 jobs:
-  tests:
+  ci:
     strategy:
       matrix:
         year: ["2021", "2022"]
@@ -9,45 +8,6 @@ jobs:
         include: # a bit of a hacky way to run the stencil tests/linkters
           - year: ".stencil"
             day: ""
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: andstor/file-existence-action@v1
-        id: check_exists
-        with:
-          files: "${{ matrix.year }}/${{ matrix.day }}/Gemfile"
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.1.2
-          bundler-cache: true
-          working-directory: "${{ matrix.year }}/${{ matrix.day }}"
-        if: steps.check_exists.outputs.files_exists == 'true'
-      - name: RSpec
-        run: "bundle exec rspec"
-        working-directory: "${{ matrix.year }}/${{ matrix.day }}"
-        if: steps.check_exists.outputs.files_exists == 'true'
-  linters:
-    strategy:
-      matrix:
-        year: ["2021", "2022"]
-        day: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25"]
-        include: # a bit of a hacky way to run the stencil tests/linkters
-          - year: ".stencil"
-            day: ""
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: andstor/file-existence-action@v1
-        id: check_exists
-        with:
-          files: "${{ matrix.year }}/${{ matrix.day }}/Gemfile"
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.1.2
-          bundler-cache: true
-          working-directory: "${{ matrix.year }}/${{ matrix.day }}"
-        if: steps.check_exists.outputs.files_exists == 'true'
-      - name: RuboCop
-        run: "bundle exec rubocop"
-        working-directory: "${{ matrix.year }}/${{ matrix.day }}"
-        if: steps.check_exists.outputs.files_exists == 'true'
+    uses: ./.github/workflows/ci-reusable.yaml
+    with:
+      working-directory: "${{ matrix.year }}/${{ matrix.day }}"

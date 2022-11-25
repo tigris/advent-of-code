@@ -1,0 +1,53 @@
+name: ci-reusable
+
+on:
+  workflow_call:
+    inputs:
+      working-directory:
+        required: true
+        type: string
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: andstor/file-existence-action@v1
+        id: check_exists
+        with:
+          files: "${{ inputs.working-directory }}/Gemfile"
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1.2
+          bundler-cache: true
+          working-directory: "${{ inputs.working-directory }}"
+        if: steps.check_exists.outputs.files_exists == 'true'
+
+      - name: RSpec
+        run: "bundle exec rspec"
+        working-directory: "${{ inputs.working-directory }}"
+        if: steps.check_exists.outputs.files_exists == 'true'
+
+  linters:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: andstor/file-existence-action@v1
+        id: check_exists
+        with:
+          files: "${{ inputs.working-directory }}/Gemfile"
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1.2
+          bundler-cache: true
+          working-directory: "${{ inputs.working-directory }}"
+        if: steps.check_exists.outputs.files_exists == 'true'
+
+      - name: RuboCop
+        run: "bundle exec rubocop"
+        working-directory: "${{ inputs.working-directory }}"
+        if: steps.check_exists.outputs.files_exists == 'true'
