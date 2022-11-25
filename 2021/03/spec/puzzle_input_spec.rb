@@ -8,7 +8,7 @@ RSpec.describe PuzzleInput do
 
     describe '.call' do
       it 'returns the correct structure' do
-        expect(described_class.call(filename)).to be_nil
+        expect(described_class.call(filename)).to eq(%w[00100 11110 10110 10111 10101 01111 00111 11100 10000 11001 00010 01010])
       end
     end
   end
