@@ -4,8 +4,8 @@ jobs:
   tests:
     strategy:
       matrix:
-        year: ["2021", "2022"]
-        day: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25"]
+        year: ["2021"] #, "2022"]
+        day: ["01", "02"] #, "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25"]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -17,6 +17,7 @@ jobs:
         with:
           ruby-version: 3.1.2
           bundler-cache: true
+        working-directory: "${{ matrix.year }}/${{ matrix.day }}"
         if: steps.check_exists.outputs.files_exists == 'true'
       - name: RSpec
         run: "bundle exec rspec"
@@ -25,8 +26,8 @@ jobs:
   linters:
     strategy:
       matrix:
-        year: ["2021", "2022"]
-        day: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25"]
+        year: ["2021"] #, "2022"]
+        day: ["01", "02"] #, "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25"]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -38,6 +39,7 @@ jobs:
         with:
           ruby-version: 3.1.2
           bundler-cache: true
+        working-directory: "${{ matrix.year }}/${{ matrix.day }}"
         if: steps.check_exists.outputs.files_exists == 'true'
       - name: RuboCop
         run: "bundle exec rubocop"
