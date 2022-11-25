@@ -7,7 +7,7 @@ class Puzzle
       prev = input[0]
       count = 0
 
-      input[1..-1].each do |item|
+      input[1..].each do |item|
         count += 1 if item > prev
         prev = item
       end

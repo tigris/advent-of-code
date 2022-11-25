@@ -4,7 +4,7 @@ require 'puzzle_input'
 
 RSpec.describe PuzzleInput do
   context 'with a valid file' do
-    let(:filename) { File.join(File.expand_path(File.dirname(__FILE__)), 'fixtures', 'input.txt') }
+    let(:filename) { File.join(__dir__, 'fixtures', 'input.txt') }
 
     describe '.call' do
       it 'returns the correct array' do
