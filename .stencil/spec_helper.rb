@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+spec/spec_helper.rb# frozen_string_literal: true
 
 require 'simplecov'
 SimpleCov.start
