@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH << File.join(File.expand_path(File.dirname(__FILE__)), '..', 'lib')
+
+require 'puzzle'
+require 'puzzle_input'
+
+input_file = File.join(File.expand_path(File.dirname(__FILE__)), '..', 'input.txt')
+input = PuzzleInput.call(input_file)
+
+puts Puzzle.call(input)
