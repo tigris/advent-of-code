@@ -4,8 +4,8 @@ require 'puzzle'
 
 RSpec.describe Puzzle do
   context 'with provided examples' do
-    let(:provided_input) { [199, 200, 208, 210, 200, 207, 240, 269, 260, 263] }
-    let(:expected_answer) { 7 }
+    let(:provided_input) { [607, 618, 618, 617, 647, 716, 769, 792] }
+    let(:expected_answer) { 5 }
 
     describe '.call' do
       it 'returns the correct result' do
