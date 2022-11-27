@@ -7,11 +7,11 @@ require 'line'
 class Puzzle
   class << self
     def call(input)
-      max_width  = input.flatten.map { |v| v[0] }.max + 1
-      max_height = input.flatten.map { |v| v[1] }.max + 1
+      max_height = input.flatten.map { |v| v[0] }.max + 1
+      max_width  = input.flatten.map { |v| v[1] }.max + 1
 
       vents = Matrix.build(max_width, max_height) { 0 }
-      lines = input.map { |line| Line.new(line[0], line[1]) }.select { |l| l.horizontal? or l.vertical? }
+      lines = input.map { |line| Line.new(line[0], line[1]) }.select { |l| l.horizontal? or l.vertical? or l.diagonal? }
 
       lines.each do |line|
         line.points.each do |point|

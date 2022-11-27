@@ -18,7 +18,7 @@ RSpec.describe Puzzle do
         [Vector[5, 5], Vector[8, 2]]
       ]
     end
-    let(:expected_answer) { 5 }
+    let(:expected_answer) { 12 }
 
     describe '.call' do
       it 'returns the correct result' do

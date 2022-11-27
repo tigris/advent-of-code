@@ -23,6 +23,12 @@ RSpec.describe Line do
         expect(line.vertical?).to be(false)
       end
     end
+
+    describe '.diagonal?' do
+      it 'is false' do
+        expect(line.diagonal?).to be(false)
+      end
+    end
   end
 
   context 'with vertical line' do
@@ -43,6 +49,55 @@ RSpec.describe Line do
     describe '.vertical?' do
       it 'is true' do
         expect(line.vertical?).to be(true)
+      end
+    end
+
+    describe '.diagonal?' do
+      it 'is false' do
+        expect(line.diagonal?).to be(false)
+      end
+    end
+  end
+
+  context 'with a diagonal line' do
+    subject(:line) { described_class.new(Vector[0, 0], Vector[2, 2]) }
+
+    describe '.points' do
+      it 'plots points for forwards diagonal down' do
+        expect(line.points).to include(Vector[0, 0], Vector[1, 1], Vector[2, 2])
+      end
+
+      it 'plots points for backwards diagonal up' do
+        line = described_class.new(Vector[2, 2], Vector[0, 0])
+        expect(line.points).to include(Vector[2, 2], Vector[1, 1], Vector[0, 0])
+      end
+
+      it 'plots points for backwards diagonal down' do
+        line = described_class.new(Vector[0, 2], Vector[2, 0])
+        expect(line.points).to include(Vector[0, 2], Vector[1, 1], Vector[2, 0])
+      end
+
+      it 'plots points for forwards diagonal up' do
+        line = described_class.new(Vector[2, 0], Vector[0, 2])
+        expect(line.points).to include(Vector[0, 2], Vector[1, 1], Vector[2, 0])
+      end
+    end
+
+    describe '.horizontal?' do
+      it 'is false' do
+        expect(line.horizontal?).to be(false)
+      end
+    end
+
+    describe '.vertical?' do
+      it 'is false' do
+        expect(line.vertical?).to be(false)
+      end
+    end
+
+    describe '.diagonal?' do
+      it 'is true' do
+        expect(line.diagonal?).to be(true)
       end
     end
   end
