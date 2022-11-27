@@ -35,4 +35,16 @@ RSpec.describe Card do
       expect(card.sum_numbers).to eq(9)
     end
   end
+
+  describe '.won?' do
+    it 'is true when won' do
+      card.remove_number(1)
+      expect(card.won?).to be(true)
+    end
+
+    it 'is false when not won' do
+      card.remove_number(4)
+      expect(card.won?).to be(false)
+    end
+  end
 end

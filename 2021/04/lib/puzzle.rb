@@ -14,7 +14,8 @@ class Puzzle
         break unless number
 
         cards.each do |card|
-          return card.sum_numbers * number if card.remove_number(number)
+          card.remove_number(number)
+          return card.sum_numbers * number if cards.all?{|c| c.won? }
         end
       end
     end

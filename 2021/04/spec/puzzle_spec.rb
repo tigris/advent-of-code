@@ -30,7 +30,7 @@ RSpec.describe Puzzle do
         ]
       ]
     end
-    let(:expected_answer) { 4512 }
+    let(:expected_answer) { 1924 }
 
     describe '.call' do
       it 'returns the correct result' do

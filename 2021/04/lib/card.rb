@@ -16,4 +16,8 @@ class Card
   def sum_numbers
     @games.inject(0) { |sum, game| sum + game.sum } / 2
   end
+
+  def won?
+    @games.any?(&:empty?)
+  end
 end
