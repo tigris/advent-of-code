@@ -15,7 +15,7 @@ class Puzzle
 
         cards.each do |card|
           card.remove_number(number)
-          return card.sum_numbers * number if cards.all?{|c| c.won? }
+          return card.sum_numbers * number if cards.all?(&:won?)
         end
       end
     end
