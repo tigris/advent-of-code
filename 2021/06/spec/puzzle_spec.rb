@@ -16,6 +16,10 @@ RSpec.describe Puzzle do
       it 'works on shorter days too' do
         expect(described_class.call(provided_input, 18)).to eq(26)
       end
+
+      it 'works on longer days' do
+        expect(described_class.call(provided_input, 256)).to eq(26_984_457_539)
+      end
     end
   end
 end
