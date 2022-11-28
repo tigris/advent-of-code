@@ -1,19 +1,14 @@
 # frozen_string_literal: true
 
-require 'fish'
-
 # Advent of Code puzzle
 class Puzzle
   class << self
     def call(input, days = 80)
-      all_fish = input.map { |i| Fish.new(i) }
-
-      days.times.each do |_day|
-        new_fish = all_fish.map(&:reduce!).compact
-        all_fish += new_fish
+      days.times do
+        input.map! { |x| x.zero? ? [6, 8] : x - 1 }
+        input.flatten!
       end
-
-      all_fish.size
+      input.size
     end
   end
 end
