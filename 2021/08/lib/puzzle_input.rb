@@ -4,7 +4,7 @@
 class PuzzleInput
   class << self
     def call(file)
-      File.readlines(file).map(&:chomp).map{|line| line.split(' | ').map{|part| part.split(' ') } }
+      File.readlines(file).map(&:chomp).map { |line| line.split(' | ').map(&:split) }
     end
   end
 end
