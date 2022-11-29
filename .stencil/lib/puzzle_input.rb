@@ -3,8 +3,8 @@
 # Convert given file into ruby data structure
 class PuzzleInput
   class << self
-    def call(_file)
-      nil
+    def call(file)
+      File.readlines(file).map(&:chomp)
     end
   end
 end

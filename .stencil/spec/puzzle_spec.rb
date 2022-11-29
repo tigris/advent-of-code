@@ -4,7 +4,9 @@ require 'puzzle'
 
 RSpec.describe Puzzle do
   context 'with provided examples' do
-    let(:provided_input) { nil }
+    let(:provided_input) do
+      []
+    end
     let(:expected_answer) { nil }
 
     describe '.call' do
