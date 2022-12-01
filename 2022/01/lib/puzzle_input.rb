@@ -4,7 +4,7 @@
 class PuzzleInput
   class << self
     def call(file)
-      File.readlines(file).map(&:chomp).chunk(&:empty?).map { |x, y| x ? nil : y }.compact.map { |x| x.map(&:to_i) }
+      File.readlines(file).map(&:chomp).chunk(&:empty?).map { |x, y| x ? nil : y.map(&:to_i) }.compact
     end
   end
 end
