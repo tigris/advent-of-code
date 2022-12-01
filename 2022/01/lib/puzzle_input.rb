@@ -7,15 +7,11 @@ class PuzzleInput
       elves = []
       elf = []
       File.readlines(file).map(&:chomp).each do |line|
-        if line.length.positive?
-          elf << line.to_i
-        else
-          elves << elf
-          elf = []
-        end
+        next if line.length.positive? and elf << line.to_i
+        elves << elf
+        elf = []
       end
       elves << elf
-      elves
     end
   end
 end
