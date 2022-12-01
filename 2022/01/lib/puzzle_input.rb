@@ -4,15 +4,7 @@
 class PuzzleInput
   class << self
     def call(file)
-      elves = []
-      elf = []
-      File.readlines(file).map(&:chomp).each do |line|
-        next if line.length.positive? && (elf << line.to_i)
-
-        elves << elf
-        elf = []
-      end
-      elves << elf
+      File.readlines(file).map(&:chomp).chunk(&:empty?).map { |_, x| x }.reject { |x| x == [''] }.map { |x| x.map(&:to_i) }
     end
   end
 end
