@@ -13,11 +13,20 @@ RSpec.describe Puzzle do
         [9, 8, 9, 9, 9, 6, 5, 6, 7, 8]
       ]
     end
-    let(:expected_answer) { 15 }
 
-    describe '.call' do
+    describe '.part1' do
+      let(:expected_answer) { 15 }
+
       it 'returns the correct result' do
-        expect(described_class.call(provided_input)).to eq(expected_answer)
+        expect(described_class.part1(provided_input)).to eq(expected_answer)
+      end
+    end
+
+    describe '.part2' do
+      let(:expected_answer) { 1134 }
+
+      it 'returns the correct result' do
+        expect(described_class.part2(provided_input)).to eq(expected_answer)
       end
     end
   end
