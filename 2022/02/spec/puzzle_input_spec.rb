@@ -7,9 +7,9 @@ RSpec.describe PuzzleInput do
     let(:filename) { File.join(__dir__, 'fixtures', 'input.txt') }
     let(:expected) do
       [
-        %i(A Y),
-        %i(B X),
-        %i(C Z)
+        %i[A Y],
+        %i[B X],
+        %i[C Z]
       ]
     end
 

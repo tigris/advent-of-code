@@ -10,14 +10,16 @@ class Puzzle
       opp_choices = { A: :rock, B: :paper, C: :scissors }
       my_choices  = { Z: :scissors, Y: :paper, X: :rock }
 
-      input.map{|x,y| [ opp_choices[x], my_choices[y] ]}.map do |opp, me|
-        match_result = case
-          when opp == me then :draw
-          when opp == :rock && me == :paper then :win
-          when opp == :scissors && me == :rock then :win
-          when opp == :paper && me == :scissors then :win
-          else :loss
-        end
+      winners = [%i[rock paper], %i[scissors rock], %i[paper scissors]]
+
+      input.map { |x, y| [opp_choices[x], my_choices[y]] }.map do |opp, me|
+        match_result = if opp == me
+                         :draw
+                       elsif winners.include?([opp, me])
+                         :win
+                       else
+                         :loss
+                       end
 
         match_points[match_result] + choice_points[me]
       end.sum
@@ -30,16 +32,17 @@ class Puzzle
       opp_choices = { A: :rock, B: :paper, C: :scissors }
       match_results = { Y: :draw, X: :loss, Z: :win }
 
-      input.map{|x,y| [ opp_choices[x], match_results[y] ]}.map do |opp, match_result|
-        me = case
-          when match_result == :draw then opp
-          when match_result == :loss && opp == :paper then :rock
-          when match_result == :loss && opp == :rock then :scissors
-          when match_result == :loss && opp == :scissors then :paper
-          when match_result == :win && opp == :rock then :paper
-          when match_result == :win && opp == :paper then :scissors
-          when match_result == :win && opp == :scissors then :rock
-        end
+      winners = [%i[rock paper], %i[scissors rock], %i[paper scissors]]
+
+      input.map { |x, y| [opp_choices[x], match_results[y]] }.map do |opp, match_result|
+        me = case match_result
+             when :draw
+               opp
+             when :win
+               winners.find { |winner, _loser| winner == opp }[1]
+             else
+               winners.find { |_winner, loser| loser == opp }[0]
+             end
 
         match_points[match_result] + choice_points[me]
       end.sum

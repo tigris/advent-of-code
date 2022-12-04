@@ -6,9 +6,9 @@ RSpec.describe Puzzle do
   context 'with provided examples' do
     let(:provided_input) do
       [
-        %i(A Y),
-        %i(B X),
-        %i(C Z)
+        %i[A Y],
+        %i[B X],
+        %i[C Z]
       ]
     end
 
