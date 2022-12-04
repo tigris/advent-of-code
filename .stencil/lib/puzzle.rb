@@ -3,7 +3,11 @@
 # Advent of Code puzzle
 class Puzzle
   class << self
-    def call(_input)
+    def part1(_input)
+      nil
+    end
+
+    def part2(_input)
       nil
     end
   end

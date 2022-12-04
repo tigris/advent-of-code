@@ -7,11 +7,20 @@ RSpec.describe Puzzle do
     let(:provided_input) do
       []
     end
-    let(:expected_answer) { nil }
 
-    describe '.call' do
+    describe '.part1' do
+      let(:expected_answer) { nil }
+
       it 'returns the correct result' do
-        expect(described_class.call(provided_input)).to eq(expected_answer)
+        expect(described_class.part1(provided_input)).to eq(expected_answer)
+      end
+    end
+
+    describe '.part2' do
+      let(:expected_answer) { nil }
+
+      it 'returns the correct result' do
+        expect(described_class.part2(provided_input)).to eq(expected_answer)
       end
     end
   end
