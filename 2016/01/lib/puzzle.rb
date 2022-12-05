@@ -16,8 +16,8 @@ class Puzzle
         length = x.join.to_i
         length *= -1 if direction > 90
 
-        vertical += length if direction == 0 || direction == 180
-        horizontal += length if direction == 90 || direction == 270
+        vertical += length if [0, 180].include?(direction)
+        horizontal += length if [90, 270].include?(direction)
       end
 
       vertical.abs + horizontal.abs
@@ -38,18 +38,18 @@ class Puzzle
           length = x.join.to_i
           length *= -1 if direction > 90
 
-          if direction == 0 || direction == 180
-            range = length.negative? ? (vertical + length .. vertical).to_a.reverse : (vertical .. vertical + length).to_a
+          if [0, 180].include?(direction)
+            range = length.negative? ? (vertical + length..vertical).to_a.reverse : (vertical..vertical + length).to_a
             range.shift
             range.each do |l|
-              positions << [ l, horizontal ]
+              positions << [l, horizontal]
               throw(:dupe) if positions.size != positions.uniq.size
             end
           else
-            range = length.negative? ? (horizontal + length .. horizontal).to_a.reverse : (horizontal .. horizontal + length).to_a
+            range = length.negative? ? (horizontal + length..horizontal).to_a.reverse : (horizontal..horizontal + length).to_a
             range.shift
             range.each do |l|
-              positions << [ vertical, l ]
+              positions << [vertical, l]
               throw(:dupe) if positions.size != positions.uniq.size
             end
           end
