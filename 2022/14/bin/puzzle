@@ -9,5 +9,5 @@ require 'puzzle_input'
 input_file = File.join(__dir__, '..', 'input.txt')
 input = PuzzleInput.call(input_file)
 
-# puts Puzzle.part1(input)
+puts Puzzle.part1(input)
 puts Puzzle.part2(input)
