@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
-CACHE = {}.freeze
+# rubocop:disable Style/MutableConstant
+CACHE = {}
+# rubocop:enable Style/MutableConstant
+
 # Advent of Code puzzle
 class Puzzle
   class << self
