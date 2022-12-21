@@ -1,52 +1,32 @@
 # frozen_string_literal: true
 
-# This is required purely for use of the in memory object id, so we can fetch it
-# out of an array when 2 values are the same
-class Item
-  attr_accessor :value, :index
-
-  def initialize(value, index)
-    @value = value
-    @index = index
-  end
-end
-
 # Advent of Code puzzle
 class Puzzle
   class << self
     def part1(input, times = 1)
-      decrypted = decrypt(input, times).cycle
-      # p decrypted
+      decrypted = decrypt(input, times)
+      zero = decrypted.index(0)
 
-      decrypted.next while decrypted.peek != 0
-
-      1000.times { decrypted.next }
-      one = decrypted.peek
-      1000.times { decrypted.next }
-      two = decrypted.peek
-      1000.times { decrypted.next }
-      three = decrypted.peek
-
-      one + two + three
+      decrypted.values_at(
+        ((zero + 1001) % decrypted.length - 1),
+        ((zero + 2001) % decrypted.length - 1),
+        ((zero + 3001) % decrypted.length - 1)
+      ).sum
     end
 
     def decrypt(input, times)
-      items = input.each_with_index.map { |e, i| Item.new(e, i) }
-
-      # p "Initial #{items.map{|x| x.value }}"
+      items = input.each_with_index.map { |e, i| [e, i] }
 
       times.times do
         input.each_with_index do |e, i|
-          item = items.find { |x| x.value == e && x.index == i }
-          current_index = items.index(item)
+          current_index = items.index([e, i])
           items.delete_at(current_index)
-          new_index = (current_index + item.value) % (input.length - 1)
-          items.insert(new_index, item)
-          # p "Processed #{e}: #{items.map{|x| x.value }}"
+          new_index = (current_index + e) % (input.length - 1)
+          items.insert(new_index, [e, i])
         end
       end
 
-      items.map(&:value)
+      items.map(&:first)
     end
 
     def part2(input)
