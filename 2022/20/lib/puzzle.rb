@@ -8,9 +8,9 @@ class Puzzle
       zero = decrypted.index(0)
 
       decrypted.values_at(
-        ((zero + 1001) % decrypted.length - 1),
-        ((zero + 2001) % decrypted.length - 1),
-        ((zero + 3001) % decrypted.length - 1)
+        (zero + 1000) % decrypted.length,
+        (zero + 2000) % decrypted.length,
+        (zero + 3000) % decrypted.length
       ).sum
     end
 
