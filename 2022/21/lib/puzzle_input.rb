@@ -4,7 +4,7 @@
 class PuzzleInput
   class << self
     def call(file)
-      File.readlines(file, chomp: true).map do |line|
+      File.readlines(file, chomp: true).to_h do |line|
         name, answer = line.split(': ')
 
         answer = if answer =~ /^(\w+) (.) (\w+)$/
@@ -13,8 +13,8 @@ class PuzzleInput
                    answer.to_f
                  end
 
-        [ name.to_sym, answer ]
-      end.to_h
+        [name.to_sym, answer]
+      end
     end
   end
 end
