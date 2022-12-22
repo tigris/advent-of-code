@@ -8,20 +8,20 @@ RSpec.describe PuzzleInput do
     let(:expected) do
       {
         root: %i[pppw + sjmn],
-        dbpl: 5,
+        dbpl: 5.0,
         cczh: %i[sllz + lgvd],
-        zczc: 2,
+        zczc: 2.0,
         ptdq: %i[humn - dvpt],
-        dvpt: 3,
-        lfqf: 4,
-        humn: 5,
-        ljgn: 2,
+        dvpt: 3.0,
+        lfqf: 4.0,
+        humn: 5.0,
+        ljgn: 2.0,
         sjmn: %i[drzm * dbpl],
-        sllz: 4,
+        sllz: 4.0,
         pppw: %i[cczh / lfqf],
         lgvd: %i[ljgn * ptdq],
         drzm: %i[hmdt - zczc],
-        hmdt: 32
+        hmdt: 32.0
       }
     end
 

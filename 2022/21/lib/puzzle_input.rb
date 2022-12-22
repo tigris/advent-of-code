@@ -4,18 +4,17 @@
 class PuzzleInput
   class << self
     def call(file)
-      data = {}
-      File.readlines(file).map(&:chomp).each do |line|
-        case line
-        when /^(\w+): (\d+)$/
-          data[Regexp.last_match[1].to_sym] = Regexp.last_match[2].to_f
-        when /^(\w+): (\w+) (.) (\w+)$/
-          data[Regexp.last_match[1].to_sym] = [Regexp.last_match[2], Regexp.last_match[3], Regexp.last_match[4]].map(&:to_sym)
-        else
-          throw :whoa
-        end
-      end
-      data
+      File.readlines(file, chomp: true).map do |line|
+        name, answer = line.split(': ')
+
+        answer = if answer =~ /^(\w+) (.) (\w+)$/
+                   Regexp.last_match[-3..].map(&:to_sym)
+                 else
+                   answer.to_f
+                 end
+
+        [ name.to_sym, answer ]
+      end.to_h
     end
   end
 end
