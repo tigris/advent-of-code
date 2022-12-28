@@ -27,12 +27,12 @@ RSpec.describe Puzzle do
       end
     end
 
-    # describe '.part2' do
-    #   let(:expected_answer) { 1707 }
-    #
-    #   it 'returns the correct result' do
-    #     expect(described_class.part2(provided_input)).to eq(expected_answer)
-    #   end
-    # end
+    describe '.part2' do
+      let(:expected_answer) { 1707 }
+
+      it 'returns the correct result' do
+        expect(described_class.part2(provided_input)).to eq(expected_answer)
+      end
+    end
   end
 end
