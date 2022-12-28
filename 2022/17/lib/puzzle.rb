@@ -127,7 +127,6 @@ class Puzzle
 
       # amount = 15
       first_rock = nil
-      possible_repeat = nil
       while amount.positive?
         amount -= 1
         rock = Rock.new(rock_order.next, cave.height + 4)
@@ -137,60 +136,15 @@ class Puzzle
           break unless rock.fall!(cave.taken_positions)
         end
 
-        # Check for repeating pattern
-        if first_rock
-          cache_data = [rock.shape, rock.positions.map(&:last), rock.positions[1][0]]
-
-          if first_rock[0] == cache_data[0] && first_rock[1] == cache_data[1]
-            # We can't check this repeat _yet_, but we can check the last one
-            if possible_repeat && cache_data[2] > 500
-              bottom = cave.taken_positions.select { |x, _| x <  possible_repeat[2] }.map(&:last)
-              top    = cave.taken_positions.select { |x, _| x >= possible_repeat[2] }.map(&:last)
-
-              puts 'REPEATED!' if bottom == top
-              break
-            end
-            possible_repeat = cache_data
-          end
-
-        else
-          first_rock = [rock.shape, rock.positions.map(&:last)]
-        end
-
         cave.settle_rock!
       end
 
-      # We bailed because we saw a repeating pattern
-      assumed = 0
-      if amount.positive?
-        # we can determine that running N more simulations results in this much extra height
-        duplications = (amount / cave.rock_count).floor # how many duplications of the current structure can we make
-        p "assumed runs: #{duplications}"
-        p "rocks per run: #{cave.rock_count}"
-        assumed = duplications * cave.height
-        amount -= (duplications * cave.rock_count)
-        p "still to run: #{amount}"
-
-        # Now we need to run the rest
-        cave.draw
-        cave.settle_rock! # there was 1 in play already
-
-        amount.times do
-          cave.add_rock(rock)
-          loop do
-            rock.send(jet_order.next.to_sym, cave.taken_positions)
-            break unless rock.fall!(cave.taken_positions)
-          end
-          cave.settle_rock!
-        end
-      end
-
       # cave.draw
-      cave.height + 1 + assumed
+      cave.height + 1
     end
 
     def part2(input)
-      part1(input, 1_000_000_000_000)
+      # part1(input, 1_000_000_000_000)
     end
   end
 end
