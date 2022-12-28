@@ -4,7 +4,7 @@ AllCops:
   NewCops: enable
 
 Layout/LineLength:
-  Max: 180
+  Enabled: false
 
 RSpec/ExampleLength:
   Enabled: false
@@ -22,4 +22,7 @@ Metrics/PerceivedComplexity:
   Enabled: false
 
 Naming/MethodParameterName:
+  Enabled: false
+
+Metrics/ParameterLists:
   Enabled: false
