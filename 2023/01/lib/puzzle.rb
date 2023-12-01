@@ -28,14 +28,16 @@ class Puzzle
     end
 
     def fix(line)
-      # We need to parse twice because something like "oneight" needs to become 18 and gsub only finds "one" on the first pass
-      line = line.gsub(/(one|two|three|four|five|six|seven|eight|nine)/) do |char|
-        DIGITS[char] + char[-1]
+      # We parse once from the front and once from the back since we only care about the first and last digits
+      line = line.sub(/(one|two|three|four|five|six|seven|eight|nine)/) do |char|
+        DIGITS[char] + char[-1] # We add back on the last character since it may be the first character of another digit
       end
 
-      line.gsub(/(one|two|three|four|five|six|seven|eight|nine)/) do |char|
-        DIGITS[char]
+      line = line.reverse.sub(/(eno|owt|eerht|ruof|evif|xis|neves|thgie|enin)/) do |char|
+        DIGITS[char.reverse]
       end
+
+      line.reverse
     end
   end
 end
