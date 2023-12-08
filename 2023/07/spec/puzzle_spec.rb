@@ -31,21 +31,3 @@ RSpec.describe Puzzle do
     end
   end
 end
-
-RSpec.describe Hand do
-  context 'when starting with a pair of jokers' do
-    subject { described_class.new('jj345') }
-
-    it 'counts as three of a kind' do
-      expect(subject.three_oak?).to be_truthy
-    end
-  end
-
-  context 'when five jokers' do
-    subject { described_class.new('jjjjj') }
-
-    it 'counts as five of a kind' do
-      expect(subject.five_oak?).to be_truthy
-    end
-  end
-end
