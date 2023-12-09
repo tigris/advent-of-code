@@ -8,7 +8,7 @@ class Puzzle
     end
 
     def next_in_sequence(numbers)
-      return 0 if numbers.uniq == [0]
+      return numbers[0] if numbers.uniq.size == 1
       numbers.last + next_in_sequence(numbers[1..].map.with_index{|n, i| n - numbers[i] })
     end
 
