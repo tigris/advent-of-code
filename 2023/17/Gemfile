@@ -14,4 +14,4 @@ gem 'guard-rspec'
 gem 'guard-rubocop'
 
 gem 'matrix'
-gem 'pairing_heap'
+gem 'rb_heap'

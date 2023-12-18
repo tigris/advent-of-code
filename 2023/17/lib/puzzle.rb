@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'pairing_heap'
+require 'rb_heap'
 
 # Advent of Code puzzle
 class Puzzle
@@ -13,15 +13,15 @@ class Puzzle
         end
       end
 
-      search = PairingHeap::MinPriorityQueue.new
+      search = Heap.new{|a,b| a[3] < b[3] }
 
       finish = [input.length-1,input[0].length-1]
-      search.push([[[0,1]], :right, 1, 0], 0)
-      search.push([[[1,0]], :down, 1, 0], 0)
+      search << [[[0,1]], :right, 1, 0]
+      search << [[[1,0]], :down, 1, 0]
 
       seen = {}
 
-      while search.any?
+      while !search.empty?
         path, direction, moves, loss = search.pop
         position = path[0]
 
@@ -64,21 +64,9 @@ class Puzzle
           straight_position = [position[0],position[1]-1]
         end
 
-        begin
-          search.push([[left_position] + path, left_direction, 1, new_loss], new_loss)
-        rescue ArgumentError
-          nil
-        end
-        begin
-          search.push([[right_position] + path, right_direction, 1, new_loss], new_loss)
-        rescue ArgumentError
-          nil
-        end
-        begin
-          search.push([[straight_position] + path, direction, moves+1, new_loss], new_loss) if moves < 3
-        rescue ArgumentError
-          nil
-        end
+        search << [[left_position] + path, left_direction, 1, new_loss]
+        search << [[right_position] + path, right_direction, 1, new_loss]
+        search << [[straight_position] + path, direction, moves+1, new_loss] if moves < 3
       end
 
       0
@@ -92,15 +80,15 @@ class Puzzle
         end
       end
 
-      search = PairingHeap::MinPriorityQueue.new
+      search = Heap.new{|a,b| a[3] < b[3] }
 
       finish = [input.length-1,input[0].length-1]
-      search.push([[[0,1]], :right, 1, 0], 0)
-      search.push([[[1,0]], :down, 1, 0], 0)
+      search << [[[0,1]], :right, 1, 0]
+      search << [[[1,0]], :down, 1, 0]
 
       seen = {}
 
-      while search.any?
+      while !search.empty?
         path, direction, moves, loss = search.pop
         position = path[0]
 
@@ -147,21 +135,9 @@ class Puzzle
           straight_position = [position[0],position[1]-1]
         end
 
-        begin
-          search.push([[left_position] + path, left_direction, 1, new_loss], new_loss) if moves > 3
-        rescue ArgumentError
-          nil
-        end
-        begin
-          search.push([[right_position] + path, right_direction, 1, new_loss], new_loss) if moves > 3
-        rescue ArgumentError
-          nil
-        end
-        begin
-          search.push([[straight_position] + path, direction, moves+1, new_loss], new_loss) if moves < 10
-        rescue ArgumentError
-          nil
-        end
+        search << [[left_position] + path, left_direction, 1, new_loss] if moves > 3
+        search << [[right_position] + path, right_direction, 1, new_loss] if moves > 3
+        search << [[straight_position] + path, direction, moves+1, new_loss] if moves < 10
       end
 
       0
