@@ -23,20 +23,14 @@ class Puzzle
     end
 
     def value(hand)
-      [ type(hand) ] + hand.chars.map{|c| CARD_VALUES[c] || c.to_i }
+      [ score(hand) ] + hand.chars.map{|c| CARD_VALUES[c] || c.to_i }
     end
 
-    def type(hand)
+    def score(hand)
       counts = counts(hand)
-      case
-      when counts.value?(5) ; 6
-      when counts.value?(4) ; 5
-      when counts.value?(3) && counts.value?(2) ; 4
-      when counts.value?(3) ; 3
-      when counts.values.count(2) == 2 ; 2
-      when counts.value?(2) ; 1
-      else 0
-      end
+      score = counts.values.max
+      score += 0.5 if (score == 3 && counts.value?(2)) || counts.values.count(2) == 2
+      score
     end
 
     def counts(hand)
