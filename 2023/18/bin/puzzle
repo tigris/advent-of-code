@@ -9,5 +9,7 @@ require 'puzzle_input'
 input_file = File.join(__dir__, '..', 'input.txt')
 input = PuzzleInput.call(input_file)
 
-puts Puzzle.part1(input)
-puts Puzzle.part2(input)
+part = ARGV[0] || :both
+
+puts Puzzle.part1(input) if part == "1" || part == :both
+puts Puzzle.part2(input) if part == "2" || part == :both
