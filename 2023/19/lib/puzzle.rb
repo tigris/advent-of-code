@@ -69,14 +69,13 @@ class Puzzle
 
     def accepted_parts(workflows, part_ratings)
       accepted = []
-      rejected = []
 
       # We have 2 known exit functions, these will store the part accordingly,
       # then return the empty array meaning there is nothing more to search for
       # this "path".
       workflow_lambdas = {
         "A" => ->(part) { accepted << part ; [] },
-        "R" => ->(part) { rejected << part ; [] }
+        "R" => ->(part) { [] }
       }
 
       workflows.each do |workflow|
@@ -95,23 +94,22 @@ class Puzzle
               when "<"
                 next if rating.min >= rule[:threshold] # Failed cos min is over and we need anything under
                 return [part.dup.merge('method' => rule[:method])] if rating.max < rule[:threshold] # Passed cos max is under
+
+                before = (rating.min .. (rule[:threshold] - 1)) # before (minus the threshold itself) should match on next run
+                after = (rule[:threshold] .. rating.max) # everything after, including threshold itself, might match some other rule
               when ">"
                 next if rating.max <= rule[:threshold] # Failed cos max is under and we need anything over
                 return [part.dup.merge('method' => rule[:method])] if rating.min > rule[:threshold] # Passed cos min is over
+
+                before = (rating.min .. rule[:threshold]) # everything before, including threshold itself, might match some other rule
+                after = ((rule[:threshold] + 1) .. rating.max) # after (minus the threshold itself) should match on next run
               end
 
-              next if rating.size == 1 # can't split any further, we must be on the threshold, try next rule
-
-              # Split the range and try this method again
-              before = (rating.min .. (rule[:threshold] - 1))
-              middle = (rule[:threshold] .. rule[:threshold])
-              after = ((rule[:threshold] + 1) .. rating.max)
 
               return [
                 part.dup.merge(rule[:category] => before),
-                part.dup.merge(rule[:category] => middle),
                 part.dup.merge(rule[:category] => after)
-              ].select{|range| range.size > 0 }
+              ]
             else
               # We've hit the default clause, nothing to test, just process forward
               return [part.dup.merge('method' => rule[:method])]
