@@ -11,7 +11,7 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: andstor/file-existence-action@v1
         id: check_exists
@@ -20,7 +20,7 @@ jobs:
 
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.1.2
+          ruby-version: 3.3.0
           bundler-cache: true
           working-directory: "${{ inputs.working-directory }}"
         if: steps.check_exists.outputs.files_exists == 'true'
@@ -33,7 +33,7 @@ jobs:
   linters:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: andstor/file-existence-action@v1
         id: check_exists
@@ -42,7 +42,7 @@ jobs:
 
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.1.2
+          ruby-version: 3.3.0
           bundler-cache: true
           working-directory: "${{ inputs.working-directory }}"
         if: steps.check_exists.outputs.files_exists == 'true'
