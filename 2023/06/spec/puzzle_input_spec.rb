@@ -6,7 +6,7 @@ RSpec.describe PuzzleInput do
   context 'with a valid file' do
     let(:filename) { File.join(__dir__, 'fixtures', 'input.txt') }
     let(:expected) do
-      %Q(Time:      7  15   30\nDistance:  9  40  200)
+      %(Time:      7  15   30\nDistance:  9  40  200)
     end
 
     describe '.call' do

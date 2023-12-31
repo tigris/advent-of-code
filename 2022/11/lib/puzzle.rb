@@ -47,7 +47,7 @@ class Monkey
       when /If false: throw to monkey (\d+)$/
         @give_false = ::Regexp.last_match(1).to_i
       when /Starting items: ([\d, ]+)$/
-        @items = ::Regexp.last_match(1).split(/,/).map { |x| x.strip.to_i }
+        @items = ::Regexp.last_match(1).split(',').map { |x| x.strip.to_i }
       when /Test: divisible by (\d+)$/
         @test = ::Regexp.last_match(1).to_i
       when /Operation: new = (.+)$/
@@ -59,7 +59,7 @@ class Monkey
   def operate(item)
     prime = @prime || all_monkeys.map(&:test).reduce(:*)
     # rubocop:disable Security/Eval
-    eval(operation.gsub(/old/, item.to_s)).to_i % prime
+    eval(operation.gsub('old', item.to_s)).to_i % prime
     # rubocop:enable Security/Eval
   end
 

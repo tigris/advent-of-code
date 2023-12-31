@@ -6,11 +6,11 @@ RSpec.describe Puzzle do
   context 'with provided examples' do
     let(:provided_input) do
       [
-        %w(32T3K 765),
-        %w(T55J5 684),
-        %w(KK677 28),
-        %w(KTJJT 220),
-        %w(QQQJA 483)
+        %w[32T3K 765],
+        %w[T55J5 684],
+        %w[KK677 28],
+        %w[KTJJT 220],
+        %w[QQQJA 483]
       ]
     end
 

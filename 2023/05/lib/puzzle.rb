@@ -11,8 +11,8 @@ class Puzzle
       map_types = data.map do |map_type|
         [map_type[0]] + map_type[1..].map do |map|
           dest, source, range = map.split(/ /, 3).map(&:to_i)
-          [(source...(source+range)), dest - source]
-        end.sort{|a,b| a[0].begin <=> b[0].begin }
+          [(source...(source + range)), dest - source]
+        end.sort { |a, b| a[0].begin <=> b[0].begin }
       end
 
       seeds.each do |seed|
@@ -23,11 +23,11 @@ class Puzzle
           # puts "  #{map_type[0]}"
           catch(:mapped) do
             map_type[1..].each do |map|
-              if map[0].cover?(location)
-                # puts "    #{map[0]}/#{map[1]}"
-                location += map[1]
-                throw(:mapped)
-              end
+              next unless map[0].cover?(location)
+
+              # puts "    #{map[0]}/#{map[1]}"
+              location += map[1]
+              throw(:mapped)
             end
           end
           # puts "    #{seed} => #{location}"
@@ -46,14 +46,14 @@ class Puzzle
       seed_ranges = []
 
       seed_data.each_slice(2) do |seed_start, seed_range|
-        seed_ranges << (seed_start...(seed_start+seed_range))
+        seed_ranges << (seed_start...(seed_start + seed_range))
       end
 
       map_types = data.map do |map_type|
         [map_type[0]] + map_type[1..].map do |map|
           dest, source, range = map.split(/ /, 3).map(&:to_i)
-          [(source...(source+range)), dest - source]
-        end.sort{|a,b| a[0].begin <=> b[0].begin }
+          [(source...(source + range)), dest - source]
+        end.sort { |a, b| a[0].begin <=> b[0].begin }
       end
 
       total_seeds = seed_ranges.map(&:size).sum

@@ -1,10 +1,7 @@
 #!/usr/bin/env ruby
 
-
 def foo
-  if true
-    variable = 'foo'
-  end
+  variable = 'foo' if true
 
   p variable
 end

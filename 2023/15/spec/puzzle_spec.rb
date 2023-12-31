@@ -31,7 +31,7 @@ RSpec.describe Puzzle do
     describe '.part2' do
       let(:expected_answer) { 145 }
 
-      fit 'returns the correct result' do
+      it 'returns the correct result' do
         expect(described_class.part2(provided_input)).to eq(expected_answer)
       end
     end

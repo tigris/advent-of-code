@@ -7,11 +7,11 @@ RSpec.describe PuzzleInput do
     let(:filename) { File.join(__dir__, 'fixtures', 'input.txt') }
     let(:expected) do
       [
-        %w(32T3K 765),
-        %w(T55J5 684),
-        %w(KK677 28),
-        %w(KTJJT 220),
-        %w(QQQJA 483)
+        %w[32T3K 765],
+        %w[T55J5 684],
+        %w[KK677 28],
+        %w[KTJJT 220],
+        %w[QQQJA 483]
       ]
     end
 

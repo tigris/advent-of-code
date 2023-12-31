@@ -4,12 +4,13 @@
 class Puzzle
   class << self
     def part1(input)
-      input.map{|x| next_in_sequence(x) }.sum
+      input.map { |x| next_in_sequence(x) }.sum
     end
 
     def next_in_sequence(numbers)
       return numbers[0] if numbers.uniq.size == 1
-      numbers.last + next_in_sequence(numbers[1..].map.with_index{|n, i| n - numbers[i] })
+
+      numbers.last + next_in_sequence(numbers[1..].map.with_index { |n, i| n - numbers[i] })
     end
 
     def part2(input)

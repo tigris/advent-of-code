@@ -4,7 +4,7 @@
 class PuzzleInput
   class << self
     def call(file)
-      File.readlines(file).map(&:chomp).chunk(&:empty?).map{_2}.reject{|x| x == [""] }
+      File.readlines(file).map(&:chomp).chunk(&:empty?).map { _2 }.reject { |x| x == [''] }
     end
   end
 end

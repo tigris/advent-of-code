@@ -15,7 +15,7 @@ RSpec.describe Puzzle do
         '..592.....',
         '......755.',
         '...$.*....',
-        '.664.598..',
+        '.664.598..'
       ]
     end
 
@@ -28,7 +28,7 @@ RSpec.describe Puzzle do
     end
 
     describe '.part2' do
-      let(:expected_answer) { 467835 }
+      let(:expected_answer) { 467_835 }
 
       it 'returns the correct result' do
         expect(described_class.part2(provided_input)).to eq(expected_answer)

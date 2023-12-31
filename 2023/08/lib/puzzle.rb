@@ -14,8 +14,8 @@ class Puzzle
 
     # just a test method to find a pattern, guess what, it was easy actually
     def steps(input, start_re, finish_re)
-      positions = input.keys.select{|k| start_re.match?(k) }
-      search = input['moves'].map{|d| d == 'L' ? 0 : 1 }.cycle
+      positions = input.keys.select { |k| start_re.match?(k) }
+      search = input['moves'].map { |d| d == 'L' ? 0 : 1 }.cycle
 
       finished_moves = {}
       positions.each do |position|
@@ -27,6 +27,7 @@ class Puzzle
               moves += 1
               position = input[position][move == 'L' ? 0 : 1]
               next unless finish_re.match?(position)
+
               finished_identifier = [starting, position, i]
               if finished_moves[finished_identifier]
                 puts "#{starting} found #{position} at move index #{i} after #{moves} moves and completing"
@@ -44,12 +45,12 @@ class Puzzle
     end
 
     def moves_for(input, start_re, finish_re)
-      search = input['moves'].map{|d| d == 'L' ? 0 : 1 }.cycle
+      search = input['moves'].map { |d| d == 'L' ? 0 : 1 }.cycle
 
-      positions = input.keys.select{|k| start_re.match?(k) }
+      positions = input.keys.select { |k| start_re.match?(k) }
       moves_for = positions.map do |position|
         moves = 0
-        while !finish_re.match?(position)
+        until finish_re.match?(position)
           moves += 1
           position = input[position][search.next]
         end

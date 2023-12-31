@@ -32,9 +32,9 @@ RSpec.describe Puzzle do
     end
 
     describe '.part2' do
-      let(:expected_answer) { 952408144115 }
+      let(:expected_answer) { 952_408_144_115 }
 
-      fit 'returns the correct result' do
+      it 'returns the correct result' do
         expect(described_class.part2(provided_input)).to eq(expected_answer)
       end
     end

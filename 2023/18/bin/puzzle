@@ -11,5 +11,5 @@ input = PuzzleInput.call(input_file)
 
 part = ARGV[0] || :both
 
-puts Puzzle.part1(input) if part == "1" || part == :both
-puts Puzzle.part2(input) if part == "2" || part == :both
+puts Puzzle.part1(input) if ['1', :both].include?(part)
+puts Puzzle.part2(input) if ['2', :both].include?(part)

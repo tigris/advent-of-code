@@ -6,11 +6,11 @@ RSpec.describe PuzzleInput do
   context 'with a valid file' do
     let(:filename) { File.join(__dir__, 'fixtures', 'input.txt') }
     let(:expected) do
-      [
-        '1abc2',
-        'pqr3stu8vwx',
-        'a1b2c3d4e5f',
-        'treb7uchet',
+      %w[
+        1abc2
+        pqr3stu8vwx
+        a1b2c3d4e5f
+        treb7uchet
       ]
     end
 

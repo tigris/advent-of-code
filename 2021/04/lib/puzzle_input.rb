@@ -6,7 +6,7 @@ class PuzzleInput
     def call(file)
       lines = File.readlines(file).map(&:chomp).reject(&:empty?)
 
-      output = [lines.shift.split(/,/).map(&:to_i)]
+      output = [lines.shift.split(',').map(&:to_i)]
       output << card_from_lines(lines.shift(5)) while lines.length.positive?
       output
     end

@@ -11,7 +11,7 @@ RSpec.describe Puzzle do
         '?#?#?#?#?#?#?#? 1,3,1,6',
         '????.#...#... 4,1,1',
         '????.######..#####. 1,6,5',
-        '?###???????? 3,2,1',
+        '?###???????? 3,2,1'
       ]
     end
 
@@ -24,7 +24,7 @@ RSpec.describe Puzzle do
     end
 
     describe '.part2' do
-      let(:expected_answer) { 525152 }
+      let(:expected_answer) { 525_152 }
 
       it 'returns the correct result' do
         expect(described_class.part2(provided_input)).to eq(expected_answer)
@@ -45,7 +45,7 @@ RSpec.describe Puzzle do
       # expect(described_class.arrangements('?#?#?#?#?#?#?#?.'.chars, [1,3,1,6])).to eq(1)
       # expect(described_class.arrangements('????.#...#....'.chars, [4,1,1])).to eq(1)
       # expect(described_class.arrangements('????.######..#####..'.chars, [1,6,5])).to eq(4)
-      expect(described_class.arrangements('?###????????.'.chars, [3,2,1])).to eq(10)
+      expect(described_class.arrangements('?###????????.'.chars, [3, 2, 1])).to eq(10)
     end
   end
 end

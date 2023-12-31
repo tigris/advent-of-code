@@ -6,7 +6,7 @@ class Puzzle
   class Snafu
     def self.to_decimal(snafu)
       snafu.chars.reverse.each_with_index.map do |e, i|
-        e.sub(/-/, '-1').sub(/=/, '-2').to_i * (i.zero? ? 1 : 5**i)
+        e.sub('-', '-1').sub('=', '-2').to_i * (i.zero? ? 1 : 5**i)
       end.sum
     end
   end

@@ -5,7 +5,7 @@ class Puzzle
   class << self
     def part1(input)
       input.map do |card|
-        (card[0] & card[1]).inject(0){|sum, _| sum = sum == 0 ? 1 : sum * 2 }
+        (card[0] & card[1]).inject(0) { |sum, _| sum = sum.zero? ? 1 : sum * 2 }
       end.sum
     end
 
@@ -18,7 +18,7 @@ class Puzzle
 
         # Future cards will get processed this many times in addition to their
         # original process
-        (1..winners).each{|i| totals[idx + i] += totals[idx] }
+        (1..winners).each { |i| totals[idx + i] += totals[idx] }
       end
 
       totals.values.sum

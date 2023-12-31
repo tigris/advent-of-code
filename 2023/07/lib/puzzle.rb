@@ -13,17 +13,17 @@ class Puzzle
     }
 
     def part1(input)
-      input.sort{|a,b| value(a[0]) <=> value(b[0]) }.map.with_index{|x, i| x[1].to_i * (i+1) }.sum
+      input.sort { |a, b| value(a[0]) <=> value(b[0]) }.map.with_index { |x, i| x[1].to_i * (i + 1) }.sum
     end
 
     def part2(input)
       # transform input so we can treat j and J differently but use the same logic
-      input = input.map{|x| [x[0].gsub(/J/, 'j'), x[1]] }
+      input = input.map { |x| [x[0].gsub('J', 'j'), x[1]] }
       part1(input)
     end
 
     def value(hand)
-      [ score(hand) ] + hand.chars.map{|c| CARD_VALUES[c] || c.to_i }
+      [score(hand)] + hand.chars.map { |c| CARD_VALUES[c] || c.to_i }
     end
 
     def score(hand)
@@ -39,7 +39,7 @@ class Puzzle
       return counts unless jokers
 
       # all 5 jokers, what a trip up
-      return {'j' => 5} if jokers == 5
+      return { 'j' => 5 } if jokers == 5
 
       # finds card with highest count (2 cards the same we find either, doesn't matter which)
       max_key = counts.invert[counts.values.max]

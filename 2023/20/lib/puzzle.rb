@@ -1,66 +1,70 @@
 # frozen_string_literal: true
 
-require_relative './helpers'
+require_relative 'helpers'
 
 # Advent of Code puzzle
 class Puzzle
   class << self
-    def part1(input, times=1000)
+    def part1(input, times = 1000)
       states = {}
       connectors = {}
       called = { high: 0, low: 0 }
 
-      modules = Hash.new ->(pulse, called_by) do
+      modules = Hash.new lambda { |pulse, _called_by|
         # p "#{called_by} -#{pulse}-> :unknown"
         called[pulse] += 1
         [:nothing, []]
-      end
+      }
 
       jobs = []
 
       input.each do |line|
         type, name, destinations = line.match(/^([%&=]?)(\w+) -> (.+)$/).captures
-        destinations = destinations.split(/, /)
+        destinations = destinations.split(', ')
 
         # initial states
-        states[name] = type == "&" ? Hash.new(:low) : :off
-        destinations.each{|d| connectors[d] ||= [] ; connectors[d] << name }
+        states[name] = type == '&' ? Hash.new(:low) : :off
+        destinations.each do |d|
+          connectors[d] ||= []
+          connectors[d] << name
+        end
 
-        modules[name] = ->(pulse, called_by) do
+        modules[name] = lambda { |pulse, called_by|
           # p "#{called_by} -#{pulse}-> #{name}"
           called[pulse] += 1
           case type
-          when ""
-            [states[name], destinations.map{|d| [d, :low, name] }]
-          when "%"
+          when ''
+            [states[name], destinations.map { |d| [d, :low, name] }]
+          when '%'
             return [states[name], []] if pulse == :high
+
             if states[name] == :off
-              [:on, destinations.map{|d| [d, :high, name] }]
+              [:on, destinations.map { |d| [d, :high, name] }]
             else
-              [:off, destinations.map{|d| [d, :low, name] }]
+              [:off, destinations.map { |d| [d, :low, name] }]
             end
-          when "&"
+          when '&'
             check_state = states[name].merge(called_by => pulse)
-            if connectors[name].all?{|x| check_state[x] == :high }
-              [{called_by => pulse}, destinations.map{|d| [d, :low, name]}]
+            if connectors[name].all? { |x| check_state[x] == :high }
+              [{ called_by => pulse }, destinations.map { |d| [d, :low, name] }]
             else
-              [{called_by => pulse}, destinations.map{|d| [d, :high, name]}]
+              [{ called_by => pulse }, destinations.map { |d| [d, :high, name] }]
             end
-          when "="
+          when '='
             if pulse == :high
               [states[name], []]
             else
               [called[:high] + called[:low], []]
             end
           end
-        end
+        }
       end
 
       times.times do
         states['rx'] = :nothing
 
         jobs << ['broadcaster', :low, :button]
-        while !jobs.empty?
+        until jobs.empty?
           job = jobs.shift
 
           new_state, new_jobs = modules[job[0]].call(job[1], job[2])

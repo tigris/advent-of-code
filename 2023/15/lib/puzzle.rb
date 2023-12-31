@@ -4,17 +4,17 @@
 class Puzzle
   class << self
     def part1(input)
-      input.map{|x| hash_block(x) }.sum
+      input.map { |x| hash_block(x) }.sum
     end
 
     def part2(input)
       boxes = Array.new(256) { [] }
-      input.each{|instruction| update_boxes!(boxes, instruction) }
+      input.each { |instruction| update_boxes!(boxes, instruction) }
       calculate_boxes(boxes)
     end
 
     def hash_block(block)
-      block.chars.reduce(0){|acc,x| hash_char(acc, x) }
+      block.chars.reduce(0) { |acc, x| hash_char(acc, x) }
     end
 
     def hash_char(score, item)
@@ -34,9 +34,9 @@ class Puzzle
       box = boxes[hash_block(label)]
 
       if operation == '-'
-        box.reject!{|x| x[0] == label }
+        box.reject! { |x| x[0] == label }
       elsif operation == '='
-        if lens = box.find{|x| x[0] == label }
+        if lens = box.find { |x| x[0] == label }
           lens[1] = focal_length.to_i
         else
           box << [label, focal_length.to_i]

@@ -41,7 +41,7 @@ RSpec.describe Puzzle do
     end
 
     describe '.mirrored_left' do
-      let(:image) {
+      let(:image) do
         [
           '#.##..##.',
           '..#.##.#.',
@@ -51,14 +51,14 @@ RSpec.describe Puzzle do
           '..##..##.',
           '#.#.##.#.'
         ]
-      }
+      end
 
       it 'works' do
         expect(described_class.mirrored_left(image, 0)).to eq(5)
       end
 
       context 'when not mirrored' do
-        let(:image) {
+        let(:image) do
           [
             '#...##..#',
             '#....#..#',
@@ -68,7 +68,7 @@ RSpec.describe Puzzle do
             '..##..###',
             '#....#..#'
           ]
-        }
+        end
 
         it 'works' do
           expect(described_class.mirrored_left(image, 0)).to eq(0)
@@ -77,7 +77,7 @@ RSpec.describe Puzzle do
     end
 
     describe '.mirrored_above' do
-      let(:image) {
+      let(:image) do
         [
           '#...##..#',
           '#....#..#',
@@ -87,7 +87,7 @@ RSpec.describe Puzzle do
           '..##..###',
           '#....#..#'
         ]
-      }
+      end
 
       it 'works' do
         expect(described_class.mirrored_above(image, 0)).to eq(4)

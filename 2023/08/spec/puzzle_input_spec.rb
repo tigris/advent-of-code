@@ -7,14 +7,14 @@ RSpec.describe PuzzleInput do
     let(:filename) { File.join(__dir__, 'fixtures', 'input.txt') }
     let(:expected) do
       {
-        'moves' => %w(R L),
-        'AAA' => %w(BBB CCC),
-        'BBB' => %w(DDD EEE),
-        'CCC' => %w(ZZZ GGG),
-        'DDD' => %w(DDD DDD),
-        'EEE' => %w(EEE EEE),
-        'GGG' => %w(GGG GGG),
-        'ZZZ' => %w(ZZZ ZZZ)
+        'moves' => %w[R L],
+        'AAA' => %w[BBB CCC],
+        'BBB' => %w[DDD EEE],
+        'CCC' => %w[ZZZ GGG],
+        'DDD' => %w[DDD DDD],
+        'EEE' => %w[EEE EEE],
+        'GGG' => %w[GGG GGG],
+        'ZZZ' => %w[ZZZ ZZZ]
       }
     end
 

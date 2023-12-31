@@ -9,7 +9,7 @@ class Puzzle
 
     def weight(matrix)
       length = matrix.keys.map(&:first).max
-      matrix.map{|k,v| v == 'O' ? length + 1 - k[0] : 0 }.sum
+      matrix.map { |k, v| v == 'O' ? length + 1 - k[0] : 0 }.sum
     end
 
     def tilt(matrix, direction, cache)
@@ -27,22 +27,22 @@ class Puzzle
 
         (0..length).each do |r|
           (0..width).each do |c|
-            curr_pos = [r,c]
+            curr_pos = [r, c]
             next_pos = case direction
-              when :north ; [r-1,c]
-              when :south ; [r+1,c]
-              when :east ; [r,c+1]
-              when :west ; [r,c-1]
-            end
+                       when :north then [r - 1, c]
+                       when :south then [r + 1, c]
+                       when :east then [r, c + 1]
+                       when :west then [r, c - 1]
+                       end
 
-            curr_item = tilted[[r,c]]
+            curr_item = tilted[[r, c]]
             next_item = tilted[next_pos]
 
-            if next_pos[0] > -1 && next_pos[1] > -1 && curr_item == 'O' && next_item == '.'
-              shifted = true
-              tilted[curr_pos] = '.'
-              tilted[next_pos] = 'O'
-            end
+            next unless next_pos[0] > -1 && next_pos[1] > -1 && curr_item == 'O' && next_item == '.'
+
+            shifted = true
+            tilted[curr_pos] = '.'
+            tilted[next_pos] = 'O'
           end
         end
       end
@@ -54,7 +54,7 @@ class Puzzle
       result = {}
       input.each_with_index do |row, r|
         row.chars.each_with_index do |char, c|
-          result[[r,c]] = char
+          result[[r, c]] = char
         end
       end
       result
@@ -105,8 +105,8 @@ class Puzzle
       (0..length).each do |r|
         puts
         (0..width).each do |c|
-          char = matrix[[r,c]]
-          char = char == 'O' ? length + 1 - r : char
+          char = matrix[[r, c]]
+          char = length + 1 - r if char == 'O'
           char = 'X' if char == 10
           print char
         end

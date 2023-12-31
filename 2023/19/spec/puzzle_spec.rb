@@ -10,7 +10,7 @@ RSpec.describe Puzzle do
     end
 
     describe '.part1' do
-      let(:expected_answer) {19114}
+      let(:expected_answer) { 19_114 }
 
       it 'returns the correct result' do
         expect(described_class.part1(provided_input)).to eq(expected_answer)
@@ -18,7 +18,7 @@ RSpec.describe Puzzle do
     end
 
     describe '.part2' do
-      let(:expected_answer) { 167409079868000 }
+      let(:expected_answer) { 167_409_079_868_000 }
 
       it 'returns the correct result' do
         expect(described_class.part2(provided_input)).to eq(expected_answer)

@@ -6,7 +6,7 @@ class PuzzleInput
     def call(file)
       {}.tap do |games|
         File.readlines(file).map(&:chomp).map do |line|
-          number, game = line.split(/:/, 2)
+          number, game = line.split(':', 2)
           games[number.sub(/^Game /, '')] = game
         end
       end

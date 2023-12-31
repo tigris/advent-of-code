@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative './helpers'
+require_relative 'helpers'
 require 'chunky_png'
 require 'set'
 
@@ -8,20 +8,20 @@ require 'set'
 class Puzzle
   class << self
     CHANGE_IN_POS = {
-      'R' => [0,1],
-      'L' => [0,-1],
-      'U' => [-1,0],
-      'D' => [1,0]
+      'R' => [0, 1],
+      'L' => [0, -1],
+      'U' => [-1, 0],
+      'D' => [1, 0]
     }
 
     def part1(input)
-      position = [0,0]
+      position = [0, 0]
       vectors = []
 
       total_distance = 0
 
-      input.each_with_index do |instruction, i|
-        direction, distance, _ = instruction.split(/ /)
+      input.each_with_index do |instruction, _i|
+        direction, distance, = instruction.split(/ /)
         total_distance += distance.to_i
 
         new_position = [
@@ -35,7 +35,7 @@ class Puzzle
       end
 
       # shoelace formula + pick's theorem
-      area = vectors.map{|a,b| (a[0] * b[1]) - (b[0] * a[1]) }.sum.abs / 2
+      area = vectors.map { |a, b| (a[0] * b[1]) - (b[0] * a[1]) }.sum.abs / 2
 
       # pick's theorem
       inside = area - (total_distance / 2) + 1
@@ -48,13 +48,13 @@ class Puzzle
       input.each do |line|
         _, _, color = line.split(/ /)
         distance, direction = color.match(/[(][#](\w{5})(\w)[)]$/).captures
-        direction = ['R', 'D', 'L', 'U'][direction.to_i]
+        direction = %w[R D L U][direction.to_i]
         distance = distance.to_i(16)
 
         new_input << [direction, distance]
       end
 
-      part1(new_input.map{|x| "#{x[0]} #{x[1]} x" })
+      part1(new_input.map { |x| "#{x[0]} #{x[1]} x" })
     end
   end
 end

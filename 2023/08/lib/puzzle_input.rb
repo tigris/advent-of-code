@@ -11,8 +11,8 @@ class PuzzleInput
 
       lines.each do |line|
         line = line.gsub(/[() ]/, '')
-        position, neighbours = line.split(/=/)
-        data[position] = neighbours.split(/,/)
+        position, neighbours = line.split('=')
+        data[position] = neighbours.split(',')
       end
 
       data

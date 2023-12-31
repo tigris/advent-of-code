@@ -24,7 +24,7 @@ class Puzzle
     end
 
     def part2(input)
-      part1 input.map{|l| fix(l) }
+      part1(input.map { |l| fix(l) })
     end
 
     def fix(line)
