@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative './helpers'
+require_relative 'helpers'
 
 # Advent of Code puzzle
 class Puzzle

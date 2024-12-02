@@ -6,12 +6,12 @@ RSpec.describe Puzzle do
   context 'with provided examples' do
     let(:provided_input) do
       [
-        "3   4",
-        "4   3",
-        "2   5",
-        "1   3",
-        "3   9",
-        "3   3"
+        '3   4',
+        '4   3',
+        '2   5',
+        '1   3',
+        '3   9',
+        '3   3'
       ]
     end
 
