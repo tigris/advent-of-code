@@ -1,5 +1,6 @@
 package main
 
+//nolint:depguard
 import (
 	"os"
 	"testing"
@@ -8,13 +9,15 @@ import (
 )
 
 func TestRunPart1(t *testing.T) {
+	t.Parallel()
 	input, _ := os.ReadFile("test_input.txt")
 
-	assert.Equal(t, runPart1(input), "11")
+	assert.Equal(t, "11", runPart1(input))
 }
 
 func TestRunPart2(t *testing.T) {
+	t.Parallel()
 	input, _ := os.ReadFile("test_input.txt")
 
-	assert.Equal(t, runPart2(input), "31")
+	assert.Equal(t, "31", runPart2(input))
 }

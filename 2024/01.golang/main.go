@@ -1,5 +1,6 @@
 package main
 
+//nolint:depguard
 import (
 	"os"
 	"slices"
@@ -15,14 +16,18 @@ func main() {
 	var Verbose bool
 	var InputFile string
 
+	//nolint:exhaustruct
 	rootCmd := &cobra.Command{
 		Use: "aoc",
-		Run: func(cmd *cobra.Command, args []string) {
+		Run: func(_ *cobra.Command, _ []string) {
 			if Verbose {
 				log.SetLevel(log.DebugLevel)
 			}
+
 			log.Debug("Reading input from ", InputFile)
 			input, _ := os.ReadFile(InputFile)
+
+			//nolint:gomnd,mnd
 			switch Part {
 			case 1:
 				log.Info("Answer for part 1: ", runPart1(input))
@@ -33,14 +38,14 @@ func main() {
 	}
 
 	rootCmd.Flags().StringVarP(&InputFile, "file", "f", "input.txt", "File to use for input")
-	rootCmd.MarkFlagRequired("file")
+	_ = rootCmd.MarkFlagRequired("file")
 
 	rootCmd.Flags().IntVarP(&Part, "part", "p", 1, "Part to run")
-	rootCmd.MarkFlagRequired("part")
+	_ = rootCmd.MarkFlagRequired("part")
 
 	rootCmd.Flags().BoolVarP(&Verbose, "verbose", "v", false, "Be more spammy")
 
-	rootCmd.Execute()
+	_ = rootCmd.Execute()
 }
 
 func runPart1(input []byte) string {
@@ -52,7 +57,7 @@ func runPart1(input []byte) string {
 	for i := range left {
 		currDiff := right[i] - left[i]
 		log.Debug("comparing ", left[i], " and ", right[i], " got ", max(currDiff, -currDiff))
-		diff = diff + max(currDiff, -currDiff)
+		diff += max(currDiff, -currDiff)
 	}
 
 	return strconv.Itoa(diff)
@@ -68,7 +73,7 @@ func runPart2(input []byte) string {
 		matches := 0
 		for _, r := range right {
 			if l == r {
-				matches += 1
+				matches++
 			}
 		}
 
@@ -86,12 +91,12 @@ func parseInput(input []byte) ([]int, []int) {
 	right := []int{}
 
 	for _, line := range lines {
-		if string(line) == "" {
+		if line == "" {
 			continue
 		}
 
-		log.Debug("Parsing line: ", string(line))
-		numbers := strings.Fields(string(line))
+		log.Debug("Parsing line: ", line)
+		numbers := strings.Fields(line)
 		leftNum, _ := strconv.Atoi(numbers[0])
 		rightNum, _ := strconv.Atoi(numbers[1])
 		left = append(left, leftNum)
@@ -100,5 +105,6 @@ func parseInput(input []byte) ([]int, []int) {
 
 	slices.Sort(left)
 	slices.Sort(right)
+
 	return left, right
 }
