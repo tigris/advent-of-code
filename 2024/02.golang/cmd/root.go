@@ -13,7 +13,7 @@ func RootCmd() *cobra.Command {
 	var InputFile string
 
 	//nolint:exhaustruct
-	var rootCmd = &cobra.Command{
+	rootCmd := &cobra.Command{
 		Use: "aoc",
 		Run: func(_ *cobra.Command, _ []string) {
 			if Verbose {

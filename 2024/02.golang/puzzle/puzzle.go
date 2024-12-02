@@ -1,6 +1,7 @@
 package puzzle
 
 import (
+	"fmt"
 	"os"
 	"slices"
 	"strconv"
@@ -22,7 +23,7 @@ func ParseInput(file string) (Input, error) {
 
 	raw, err := os.ReadFile(file)
 	if err != nil {
-		return input, err
+		return input, fmt.Errorf("couldn't read file: %w", err)
 	}
 
 	lines := strings.Split(string(raw), "\n")

@@ -4,5 +4,9 @@ run:
 linters:
   enable-all: true
   disable:
+    - depguard
+    - gci
+    - gomnd
+    - testpackage
     - varnamelen
     - wsl
