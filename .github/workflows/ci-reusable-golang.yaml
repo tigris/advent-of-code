@@ -1,0 +1,51 @@
+name: ci-reusable-golang
+
+on:
+  workflow_call:
+    inputs:
+      working-directory:
+        required: true
+        type: string
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: andstor/file-existence-action@v1
+        id: check_exists
+        with:
+          files: "${{ inputs.working-directory }}/go.mod"
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: "${{ inputs.working-directory }}/go.mod"
+          working-directory: "${{ inputs.working-directory }}"
+        if: steps.check_exists.outputs.files_exists == 'true'
+
+      - run: "go test ./..."
+        working-directory: "${{ inputs.working-directory }}"
+        if: steps.check_exists.outputs.files_exists == 'true'
+
+  linters:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: andstor/file-existence-action@v1
+        id: check_exists
+        with:
+          files: "${{ inputs.working-directory }}/go.mod"
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: "${{ inputs.working-directory }}/go.mod"
+          working-directory: "${{ inputs.working-directory }}"
+        if: steps.check_exists.outputs.files_exists == 'true'
+
+      - uses: golangci/golangci-lint-action@v6
+        with:
+          version: "latest"
+          working-directory: "${{ inputs.working-directory }}"
+        if: steps.check_exists.outputs.files_exists == 'true'

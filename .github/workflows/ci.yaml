@@ -3,11 +3,11 @@ jobs:
   ci:
     strategy:
       matrix:
-        year: ["2023"]
+        year: ["2024"]
         day: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25"]
         include: # a bit of a hacky way to run the stencil tests/linkters
-          - year: ".stencil.ruby"
+          - year: ".stencil.golang"
             day: ""
-    uses: ./.github/workflows/ci-reusable-ruby.yaml
+    uses: ./.github/workflows/ci-reusable-golang.yaml
     with:
       working-directory: "${{ matrix.year }}/${{ matrix.day }}"
