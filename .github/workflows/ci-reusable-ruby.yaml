@@ -1,4 +1,4 @@
-name: ci-reusable
+name: ci-reusable-ruby
 
 on:
   workflow_call:
