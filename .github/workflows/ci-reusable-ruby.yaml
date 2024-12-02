@@ -13,14 +13,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: andstor/file-existence-action@v1
+      - uses: andstor/file-existence-action@v3
         id: check_exists
         with:
           files: "${{ inputs.working-directory }}/Gemfile"
 
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.3.0
+          ruby-version: 3.3.6
           bundler-cache: true
           working-directory: "${{ inputs.working-directory }}"
         if: steps.check_exists.outputs.files_exists == 'true'
@@ -35,14 +35,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: andstor/file-existence-action@v1
+      - uses: andstor/file-existence-action@v3
         id: check_exists
         with:
           files: "${{ inputs.working-directory }}/Gemfile"
 
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.3.0
+          ruby-version: 3.3.6
           bundler-cache: true
           working-directory: "${{ inputs.working-directory }}"
         if: steps.check_exists.outputs.files_exists == 'true'

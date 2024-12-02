@@ -1,11 +1,19 @@
 on: [push]
 jobs:
-  ci:
+  ruby:
     strategy:
       matrix:
-        language: ["golang", "ruby"]
         year: ["2024"]
         day: ["01", "02"]
-    uses: "./.github/workflows/ci-reusable-${{ matrix.language }}.yaml"
+    uses: "./.github/workflows/ci-reusable-ruby.yaml"
     with:
-      working-directory: "${{ matrix.year }}/${{ matrix.day }}.${{ matrix.language }}"
+      working-directory: "${{ matrix.year }}/${{ matrix.day }}.ruby"
+
+  golang:
+    strategy:
+      matrix:
+        year: ["2024"]
+        day: ["01", "02"]
+    uses: "./.github/workflows/ci-reusable-golang.yaml"
+    with:
+      working-directory: "${{ matrix.year }}/${{ matrix.day }}.golang"

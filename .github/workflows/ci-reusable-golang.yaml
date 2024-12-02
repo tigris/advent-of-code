@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: andstor/file-existence-action@v1
+      - uses: andstor/file-existence-action@v3
         id: check_exists
         with:
           files: "${{ inputs.working-directory }}/go.mod"
@@ -21,7 +21,7 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: "${{ inputs.working-directory }}/go.mod"
-          working-directory: "${{ inputs.working-directory }}"
+          cache-dependency-path: "${{ inputs.working-directory }}/go.sum"
         if: steps.check_exists.outputs.files_exists == 'true'
 
       - run: "go test ./..."
@@ -33,7 +33,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: andstor/file-existence-action@v1
+      - uses: andstor/file-existence-action@v3
         id: check_exists
         with:
           files: "${{ inputs.working-directory }}/go.mod"
@@ -41,7 +41,7 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: "${{ inputs.working-directory }}/go.mod"
-          working-directory: "${{ inputs.working-directory }}"
+          cache-dependency-path: "${{ inputs.working-directory }}/go.sum"
         if: steps.check_exists.outputs.files_exists == 'true'
 
       - uses: golangci/golangci-lint-action@v6
