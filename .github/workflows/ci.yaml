@@ -5,6 +5,9 @@ jobs:
       matrix:
         year: ["2024"]
         day: ["01", "02"]
+        include:
+          - year: "."
+            day: ".stencil"
     uses: "./.github/workflows/ci-reusable-ruby.yaml"
     with:
       working-directory: "${{ matrix.year }}/${{ matrix.day }}.ruby"
@@ -14,6 +17,9 @@ jobs:
       matrix:
         year: ["2024"]
         day: ["01", "02"]
+        include:
+          - year: "."
+            day: ".stencil"
     uses: "./.github/workflows/ci-reusable-golang.yaml"
     with:
       working-directory: "${{ matrix.year }}/${{ matrix.day }}.golang"
