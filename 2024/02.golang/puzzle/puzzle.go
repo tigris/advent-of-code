@@ -1,50 +1,14 @@
 package puzzle
 
 import (
-	"fmt"
-	"os"
 	"slices"
 	"strconv"
-	"strings"
 
 	log "github.com/sirupsen/logrus"
 )
 
-type Input struct {
-	Reports []Report
-}
-
 type Report struct {
 	Levels []int
-}
-
-func ParseInput(file string) (Input, error) {
-	input := Input{Reports: []Report{}}
-
-	raw, err := os.ReadFile(file)
-	if err != nil {
-		return input, fmt.Errorf("couldn't read file: %w", err)
-	}
-
-	lines := strings.Split(string(raw), "\n")
-
-	for _, line := range lines {
-		if line == "" {
-			continue
-		}
-
-		log.Debug("Parsing line: ", line)
-		report := Report{Levels: []int{}}
-		levels := strings.Split(line, " ")
-
-		for _, level := range levels {
-			number, _ := strconv.Atoi(level)
-			report.Levels = append(report.Levels, number)
-		}
-		input.Reports = append(input.Reports, report)
-	}
-
-	return input, nil
 }
 
 func PartOne(input Input) string {

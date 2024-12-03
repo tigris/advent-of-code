@@ -4,17 +4,18 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"regexp"
+
+	util "aoc/util"
 
 	log "github.com/sirupsen/logrus"
 )
 
 type Input struct {
-	Lines []string
+	Reports []Report
 }
 
 func ParseInput(filename string) (Input, error) {
-	input := Input{Lines: []string{}}
+	input := Input{Reports: []Report{}}
 
 	log.Debug("Slurping file: ", filename)
 	file, err := os.Open(filename)
@@ -26,12 +27,12 @@ func ParseInput(filename string) (Input, error) {
 	defer file.Close()
 
 	scanner := bufio.NewScanner(file)
-	re := regexp.MustCompile("^.+$")
-
 	for scanner.Scan() {
 		line := scanner.Text()
 		log.Debug("Parsing line: ", line)
-		input.Lines = append(input.Lines, re.FindAllString(line, -1)[0])
+
+		levels := util.LineToInts(line)
+		input.Reports = append(input.Reports, Report{Levels: levels})
 	}
 
 	return input, nil

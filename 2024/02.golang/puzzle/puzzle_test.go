@@ -1,6 +1,5 @@
 package puzzle
 
-//nolint:depguard
 import (
 	"testing"
 

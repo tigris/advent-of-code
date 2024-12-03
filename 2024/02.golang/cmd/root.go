@@ -22,7 +22,7 @@ func RootCmd() *cobra.Command {
 
 			input, _ := puzzle.ParseInput(InputFile)
 
-			//nolint:gomnd,mnd
+			//nolint:mnd
 			switch Part {
 			case 1:
 				log.Info("Answer for part 1: ", puzzle.PartOne(input))
