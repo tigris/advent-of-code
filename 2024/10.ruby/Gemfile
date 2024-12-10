@@ -1,0 +1,18 @@
+# frozen_string_literal: true
+
+source 'https://rubygems.org'
+
+gem 'reek'
+gem 'rspec'
+gem 'simplecov'
+
+gem 'rubocop'
+gem 'rubocop-rspec'
+
+gem 'guard'
+gem 'guard-rspec'
+gem 'guard-rubocop'
+
+gem 'chunky_png'
+gem 'matrix'
+gem 'rb_heap'
