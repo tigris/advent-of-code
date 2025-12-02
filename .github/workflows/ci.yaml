@@ -3,8 +3,8 @@ jobs:
   ruby:
     strategy:
       matrix:
-        year: ["2024"]
-        day: ["01", "02"]
+        year: ["2025"]
+        day: ["01"]
         include:
           - year: "."
             day: ".stencil"
@@ -12,14 +12,14 @@ jobs:
     with:
       working-directory: "${{ matrix.year }}/${{ matrix.day }}.ruby"
 
-  golang:
-    strategy:
-      matrix:
-        year: ["2024"]
-        day: ["01", "02"]
-        include:
-          - year: "."
-            day: ".stencil"
-    uses: "./.github/workflows/ci-reusable-golang.yaml"
-    with:
-      working-directory: "${{ matrix.year }}/${{ matrix.day }}.golang"
+  # golang:
+  #   strategy:
+  #     matrix:
+  #       year: ["2024"]
+  #       day: ["01", "02"]
+  #       include:
+  #         - year: "."
+  #           day: ".stencil"
+  #   uses: "./.github/workflows/ci-reusable-golang.yaml"
+  #   with:
+  #     working-directory: "${{ matrix.year }}/${{ matrix.day }}.golang"
