@@ -32,5 +32,23 @@ RSpec.describe Puzzle do
         expect(described_class.part2(provided_input)).to eq(expected_answer)
       end
     end
+
+    describe '.match?' do
+      it 'solves for a half split' do
+        expect(described_class.match?("1212", 2)).to eq(true)
+      end
+
+      it 'solves for a tri split' do
+        expect(described_class.match?("121212", 2)).to eq(true)
+      end
+
+      it 'fails on half split' do
+        expect(described_class.match?("121212", 3)).to eq(false)
+      end
+
+      it 'fails on tri split' do
+        expect(described_class.match?("998", 1)).to eq(false)
+      end
+    end
   end
 end

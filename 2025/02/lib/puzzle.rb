@@ -20,12 +20,10 @@ class Puzzle
             next
           end
 
-          chars = it.to_s.chars
-          half  = chars.length / 2
-          front = chars[0 ... half]
-          back  = chars[half ..]
+          string = it.to_s
+          next if string.length.odd?
 
-          matches[it] = front == back ? 1 : 0
+          matches[it] = match?(string, string.length / 2) ? 1 : 0
         end
       end
 
@@ -34,7 +32,39 @@ class Puzzle
 
     sig { params(input: T::Array[String]).returns(Integer) }
     def part2(input)
-      0
+      ranges = T.must(input[0]).split(',').map{ a, b = it.split('-') ; a.to_i .. b.to_i }
+
+      matches = {}
+      ranges.each do |range|
+        range.each do |number|
+          if matches.key?(number)
+            matches[number] += 1 if matches[number].positive?
+            next
+          end
+
+          (1 .. (number.to_s.length / 2)).each do |split|
+            if match?(number.to_s, split)
+              matches[number] = 1
+              break
+            end
+          end
+
+          matches[number] = 0 unless matches.key?(number)
+        end
+      end
+
+      matches.map{|k, v| k * v }.sum
+    end
+
+    sig { params(string: String, split: Integer).returns(T::Boolean) }
+    def match?(string, split)
+      chars = string.chars
+      return false unless chars.length % split == 0
+
+      chunks = chars.each_slice(split)
+
+      first = chunks.next
+      return chunks.all? { it == first }
     end
   end
 end
