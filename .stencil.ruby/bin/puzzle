@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
+# typed: strict
 
 $LOAD_PATH << File.join(__dir__, '..', 'lib')
 
