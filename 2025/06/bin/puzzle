@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+# typed: strict
+
+$LOAD_PATH << File.join(__dir__, '..', 'lib')
+
+require 'sorbet-runtime'
+require 'benchmark'
+require 'puzzle'
+require 'puzzle_input'
+
+input_file = File.join(__dir__, '..', 'input.txt')
+input = PuzzleInput.call(input_file)
+
+part = ARGV[0] || :both
+
+Benchmark.bm do |bm|
+  bm.report('Part 1:') { puts "Part 1: #{Puzzle.part1(input)}" if ['1', :both].include?(part) }
+  bm.report('Part 2:') { puts "Part 2: #{Puzzle.part2(input)}" if ['2', :both].include?(part) }
+end

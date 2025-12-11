@@ -1,0 +1,23 @@
+# frozen_string_literal: true
+
+source 'https://rubygems.org'
+ruby "~> #{File.read(File.join(__dir__, '.ruby-version')).chomp.split('.').slice(0, 2).join('.')}.0"
+
+gem 'sorbet'
+gem 'sorbet-runtime'
+gem 'tapioca', '~> 0.17', require: false
+
+gem 'reek'
+gem 'rspec'
+gem 'simplecov'
+
+gem 'rubocop'
+gem 'rubocop-rspec'
+
+gem 'guard'
+gem 'guard-rspec'
+gem 'guard-rubocop'
+
+gem 'chunky_png'
+gem 'matrix'
+gem 'rb_heap'
