@@ -5,6 +5,7 @@
 $LOAD_PATH << File.join(__dir__, '..', 'lib')
 
 require 'sorbet-runtime'
+require 'benchmark'
 require 'puzzle'
 require 'puzzle_input'
 
@@ -13,5 +14,7 @@ input = PuzzleInput.call(input_file)
 
 part = ARGV[0] || :both
 
-puts Puzzle.part1(input) if ['1', :both].include?(part)
-puts Puzzle.part2(input) if ['2', :both].include?(part)
+Benchmark.bm do |x|
+  x.report('Part 1:') { puts "Part 1: #{Puzzle.part1(input)}" if ['1', :both].include?(part) }
+  x.report('Part 2:') { puts "Part 2: #{Puzzle.part2(input)}" if ['2', :both].include?(part) }
+end

@@ -19,9 +19,9 @@ class Puzzle
       map = Helpers.hash_of_points(input)
 
       removed = 0
-      movable = map.select { _2.value == '@' && _2.around(map, diagonal: true).count { it.value == '@' } < 4 }
+      movable = map.select { movable?(_2, map) }
 
-      while movable.size.positive?
+      until movable.empty?
         removing = movable.values.first
 
         # remove it
@@ -42,12 +42,12 @@ class Puzzle
         end
       end
 
-      removed + movable.size
+      removed
     end
 
-    sig { params(point: Point, map: T::Hash[T::Array[T.untyped], Point]).returns(T::Boolean) }
+    sig { params(point: Point, map: T::Hash[T::Array[Integer], Point]).returns(T::Boolean) }
     def movable?(point, map)
-      return false unless point.value == '@' # not even a paper roll
+      return false if point.value == '.' # not even a paper roll
 
       point.around(map, diagonal: true).count { it.value == '@' } < 4
     end
