@@ -4,7 +4,7 @@ jobs:
     strategy:
       matrix:
         year: ["2025"]
-        day: ["01", "02", "03", "04"]
+        day: ["01", "02", "03", "04", "05"]
         include:
           - year: "."
             day: ".stencil"
