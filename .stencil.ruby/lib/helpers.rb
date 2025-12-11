@@ -142,5 +142,47 @@ class Puzzle
         stream.close if file
       end
     end
+
+    def range_compact(ranges)
+      return ranges if ranges.length <= 1
+
+      sorted_ranges = ranges.sort_by!(&:begin)
+      current_begin = sorted_ranges[0].begin
+      current_end = sorted_ranges[0].end
+      result = []
+
+      i = 1
+      len = sorted_ranges.length
+      while i < len
+        range = sorted_ranges[i]
+        range_begin = range.begin
+        range_end = range.end
+
+        if range_begin <= current_end + 1
+          current_end = range_end if range_end > current_end
+        else
+          result << (current_begin..current_end)
+          current_begin = range_begin
+          current_end = range_end
+        end
+        i += 1
+      end
+
+      result << (current_begin..current_end)
+      result
+    end
+
+    def range_union(range1, range2)
+      r1_begin = range1.begin
+      r1_end = range1.end
+      r2_begin = range2.begin
+      r2_end = range2.end
+
+      return if r1_end < r2_begin || r2_end < r1_begin
+
+      new_begin = r1_begin < r2_begin ? r1_begin : r2_begin
+      new_end = r1_end > r2_end ? r1_end : r2_end
+      (new_begin..new_end)
+    end
   end
 end
